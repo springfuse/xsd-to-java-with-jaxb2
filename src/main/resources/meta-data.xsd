@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by SPRINGFUSE -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="metaData">
+		<xs:annotation>
+			<xs:documentation>My interesting comment</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+				<xs:element ref="configuration" minOccurs="0"/>
+				<xs:element ref="database"/>
+				<xs:element ref="table" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="database">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="databaseProductName" type="xs:string"/>
+			<xs:attribute name="databaseProductVersion" type="xs:string"/>
+			<xs:attribute name="databaseMajorVersion" type="xs:int"/>
+			<xs:attribute name="databaseMinorVersion" type="xs:int"/>
+			<xs:attribute name="driverName" type="xs:string"/>
+			<xs:attribute name="driverVersion" type="xs:string"/>
+			<xs:attribute name="driverMajorVersion" type="xs:int"/>
+			<xs:attribute name="driverMinorVersion" type="xs:int"/>
+			<xs:attribute name="extraInfo" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+				<xs:element ref="column" maxOccurs="unbounded"/>
+				<xs:element ref="index" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="importedKey" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="primaryKey" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="type">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="TABLE"/>
+						<xs:enumeration value="VIEW"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="remarks" type="xs:string"/>
+			<xs:attribute name="name" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="column">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+				<xs:element ref="enum" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="dataType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Types.BIGINT"/>
+						<xs:enumeration value="Types.BINARY"/>
+						<xs:enumeration value="Types.BIT"/>
+						<xs:enumeration value="Types.BLOB"/>
+						<xs:enumeration value="Types.BOOLEAN"/>
+						<xs:enumeration value="Types.CHAR"/>
+						<xs:enumeration value="Types.CLOB"/>
+						<xs:enumeration value="Types.DATALINK"/>
+						<xs:enumeration value="Types.DATE"/>
+						<xs:enumeration value="Types.DECIMAL"/>
+						<xs:enumeration value="Types.DISTINCT"/>
+						<xs:enumeration value="Types.DOUBLE"/>
+						<xs:enumeration value="Types.FLOAT"/>
+						<xs:enumeration value="Types.INTEGER"/>
+						<xs:enumeration value="Types.JAVA_OBJECT"/>
+						<xs:enumeration value="Types.LONGVARBINARY"/>
+						<xs:enumeration value="Types.LONGVARCHAR"/>
+						<xs:enumeration value="Types.NUMERIC"/>
+						<xs:enumeration value="Types.OTHER"/>
+						<xs:enumeration value="Types.REAL"/>
+						<xs:enumeration value="Types.REF"/>
+						<xs:enumeration value="Types.SMALLINT"/>
+						<xs:enumeration value="Types.STRUCT"/>
+						<xs:enumeration value="Types.TIME"/>
+						<xs:enumeration value="Types.TIMESTAMP"/>
+						<xs:enumeration value="Types.TINYINT"/>
+						<xs:enumeration value="Types.VARBINARY"/>
+						<xs:enumeration value="Types.VARCHAR"/>
+						<xs:enumeration value="Types.ARRAY"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="decimalDigits" type="xs:int" use="required"/>
+			<xs:attribute name="nullable" type="xs:boolean" use="required"/>
+			<xs:attribute name="remarks" type="xs:string"/>
+			<xs:attribute name="columnDef" type="xs:string"/>
+			<xs:attribute name="size" type="xs:int" use="required"/>
+			<xs:attribute name="ordinalPosition" type="xs:int" default="0"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="enum">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="value" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>	
+	<xs:element name="index">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="indexName" type="xs:string" use="required"/>
+			<xs:attribute name="columnName" type="xs:string" use="required"/>
+			<xs:attribute name="nonUnique" type="xs:boolean" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="importedKey">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="fkColumnName" type="xs:string" use="required"/>
+			<xs:attribute name="pkTableName" type="xs:string" use="required"/>
+			<xs:attribute name="pkColumnName" type="xs:string" use="required"/>
+			<xs:attribute name="fkName" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="primaryKey">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="description" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="columnName" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="configuration">
+		<xs:complexType>
+			<xs:attribute name="jdbcUser" type="xs:string"/>
+			<xs:attribute name="jdbcPassword" type="xs:string"/>
+			<xs:attribute name="jdbcUrl" type="xs:string"/>
+			<xs:attribute name="jdbcDriver" type="xs:string"/>
+			<xs:attribute name="catalog" type="xs:string"/>
+			<xs:attribute name="schemaName" type="xs:string"/>
+			<xs:attribute name="jdbcOracleRetrieveRemarks" type="xs:boolean" default="true"/>
+			<xs:attribute name="jdbcOracleRetrieveSynonyms" type="xs:boolean" default="true"/>
+			<xs:attribute name="tableNamePattern" type="xs:string" default="%"/>
+			<xs:attribute name="tableTypes">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="TABLE"/>
+						<xs:enumeration value="VIEW"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="description">
+		<xs:annotation>
+			<xs:documentation>Document this construct</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true"/>
+	</xs:element>
+</xs:schema>
